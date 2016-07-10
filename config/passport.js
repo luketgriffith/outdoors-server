@@ -10,10 +10,12 @@ var User = require('../models/user');
 
 //serialize and deserialize
 passport.serializeUser(function(user, done){
+  console.log('serializing...')
   done(null, user._id);
 });
 
 passport.deserializeUser(function(id, done){
+  console.log('deserializing...')
   User.findById(id, function(err, user){
     done(err, user);
   });
@@ -31,11 +33,11 @@ passport.use('local-login', new LocalStrategy({
     if(err) return done(err);
 
     if(!user){
-      return done(null, false, req.flash('loginMessage', 'No user found'));
+      return done(null, false);
     }
 
     if (!user.comparePassword(password)){
-      return done(null, false, req.flash('loginMessage', 'Wrong Password'));
+      return done(null, false);
     }
     return done(null, user);
   });

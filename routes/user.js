@@ -39,4 +39,22 @@ router.post('/signup', function(req, res, next){
   
 });
 
+router.post('/login', passport.authenticate('local-login'), function(req, res) {
+        res.status(200).json({
+            success: true,
+            message: 'Enjoy!',
+            redirect: '/',
+        }).end();
+  
+}); 
+
+router.get('/wat', function(req, res, next) {
+  if (req.user) { console.log(req.user) }
+})
+
+router.get('/no', function(req, res, next) {
+  if (req.user) { console.log(req.user) }
+    console.log('nooooooo')
+})
+
 module.exports = router;
