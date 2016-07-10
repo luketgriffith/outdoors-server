@@ -12,32 +12,31 @@ var path = require('path');
 var xoauth2 = require('xoauth2');
 
 router.post('/signup', function(req, res, next){
-  console.log('got a post')
+  console.log('got a post', req.body)
+  var user = new User();
 
+  async.waterfall([
+    function(callback){
 
-  // async.waterfall([
-  //   function(callback){
-  //      var user = new User();
-
-  //       user.profile.name = req.body.username;
-  //       user.password = req.body.password;
-  //       user.email = req.body.email;
-  //       user.profile.picture = user.gravatar();
-  //       // user.image = 'imageupload-' + now +'.jpg';
-  //       User.findOne({ email: req.body.email}, function(err, existingUser){
-  //         if (existingUser){
-  //           req.flash('errors', 'Account already exists');
-  //           return res.redirect('/signup');
-  //         } else {
-  //           user.save(function(err, user) {
-  //             if(err) return next(err);
-  //             callback(null, user);
-  //           });
-  //         }
-  //       });
-  //     },
+        // user.profile.name = req.body.username;
+        user.password = req.body.password;
+        user.email = req.body.email;
+        user.profile.picture = user.gravatar();
+        User.findOne({ email: req.body.email}, function(err, existingUser){
+          if (existingUser){
+            //need error handling
+          } else {
+            user.save(function(err, user) {
+              if(err) return next(err);
+              callback(null, user);
+              //need response here
+            });
+          }
+        });
+      }
         
-  // ])
+  ])
+  
 });
 
 module.exports = router;
