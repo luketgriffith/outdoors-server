@@ -25,10 +25,18 @@ router.post('/signup', function(req, res, next){
         User.findOne({ email: req.body.email}, function(err, existingUser){
           if (existingUser){
             //need error handling
+            res.status(400).json({
+                success: false,
+                message: 'Email already in use!'
+            }).end();
           } else {
             user.save(function(err, user) {
               if(err) return next(err);
               callback(null, user);
+              res.status(200).json({
+                success: true,
+                message: 'Yayyyyyy!'
+            }).end();
               //need response here
             });
           }
@@ -40,21 +48,20 @@ router.post('/signup', function(req, res, next){
 });
 
 router.post('/login', passport.authenticate('local-login'), function(req, res) {
-        res.status(200).json({
-            success: true,
-            message: 'Enjoy!',
-            redirect: '/',
-        }).end();
-  
+  res.status(200).json({
+      success: true,
+      message: 'Enjoy!',
+      redirect: '/',
+  }).end();
 }); 
 
-router.get('/wat', function(req, res, next) {
-  if (req.user) { console.log(req.user) }
-})
-
-router.get('/no', function(req, res, next) {
-  if (req.user) { console.log(req.user) }
-    console.log('nooooooo')
-})
+router.get('/logout', function(req, res){
+  req.logout();
+  res.status(200).json({
+      success: true,
+      message: 'You has been logged out.',
+      redirect: '/',
+  }).end();
+});
 
 module.exports = router;

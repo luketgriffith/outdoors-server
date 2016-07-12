@@ -1,0 +1,3 @@
+node_modules
+server/config/secret
+.DS_Store
