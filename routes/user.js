@@ -33,11 +33,7 @@ router.post('/signup', function(req, res, next){
             user.save(function(err, user) {
               if(err) return next(err);
               callback(null, user);
-              res.status(200).json({
-                success: true,
-                message: 'Yayyyyyy!'
-            }).end();
-              //need response here
+              res.status(200).send(user).end();
             });
           }
         });
@@ -48,11 +44,7 @@ router.post('/signup', function(req, res, next){
 });
 
 router.post('/login', passport.authenticate('local-login'), function(req, res) {
-  res.status(200).json({
-      success: true,
-      message: 'Enjoy!',
-      redirect: '/',
-  }).end();
+  res.status(200).send(req.user).end();
 }); 
 
 router.get('/logout', function(req, res){
