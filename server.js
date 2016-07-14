@@ -59,10 +59,12 @@ app.set('port', (process.env.PORT || 5000));
 //routes
 // var mainRoutes = require('./routes/main');
 var userRoutes = require('./routes/user');
+var locationRoutes = require('./routes/location');
 // var adminRoutes = require('./routes/admin');
 // var apiRoutes = require('./api/api');
 // app.use(mainRoutes);
 app.use(userRoutes);
+app.use(locationRoutes);
 // app.use(adminRoutes);
 // app.use('/api', apiRoutes);
 

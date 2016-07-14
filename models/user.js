@@ -15,10 +15,8 @@ var UserSchema = new mongoose.Schema({
   tokens: Array,
   address: String,
   image: String,
-  history: [{
-    date: Date,
-    paid: {type: Number, default: 0},
-    item: {type: Schema.Types.ObjectId, ref: 'Product'}
+  locations: [{
+    location: {type: Schema.Types.ObjectId, ref: 'Location'}
   }]
 })
 
