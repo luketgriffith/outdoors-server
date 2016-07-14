@@ -24,5 +24,13 @@ router.post('/locations', function(req, res, next) {
   })
 })
 
+router.get('/locations', function(req, res, next) {
+  Location
+    .find()
+    .exec(function(err, locations) {
+      if(err) return next(err);
+      res.status(200).send(locations).end();
+    })
+})
 
 module.exports = router;
