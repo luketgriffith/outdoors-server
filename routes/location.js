@@ -33,4 +33,14 @@ router.get('/locations', function(req, res, next) {
     })
 })
 
+router.get('/locations/:locationId', function(req, res, next) {
+  Location
+    .findOne({ _id: req.params.locationId })
+    .exec(function(err, location) {
+      if(err) return next(err);
+      res.status(200).send(location).end();
+    })
+})
+
+
 module.exports = router;
