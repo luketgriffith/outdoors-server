@@ -9,6 +9,8 @@ var LocationSchema = new mongoose.Schema({
   location: String,
   image: String,
   type: String,
+  address: String,
+  description: String,
   owner: {type: Schema.Types.ObjectId, ref: 'User'}
 })
 

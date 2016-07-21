@@ -11,11 +11,15 @@ var path = require('path');
 var xoauth2 = require('xoauth2');
 
 router.post('/locations', function(req, res, next) {
+  console.log(req.body)
+  console.log(req.user)
   var location = new Location();
   location.title = req.body.title;
-  location.location = req.body.location;
-  location.image = req.body.image;
-  location.type = req.body.type;
+  // location.address = req.body.address;
+  location.description = req.body.description;
+  // location.location = req.body.location;
+  location.image = req.body.imageUrl;
+  // location.type = req.body.type;
   location.owner = req.user._id;
   location.save(function(err) {
     if(err) return next(err);
