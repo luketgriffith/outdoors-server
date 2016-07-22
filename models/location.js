@@ -7,11 +7,11 @@ var Schema = mongoose.Schema;
 var LocationSchema = new mongoose.Schema({
   title: String,
   location: String,
-  image: String,
+  imageUrl: String,
   type: String,
   address: String,
   description: String,
-  owner: {type: Schema.Types.ObjectId, ref: 'User'}
+  owner: String
 })
 
 module.exports = mongoose.model('Location', LocationSchema);
